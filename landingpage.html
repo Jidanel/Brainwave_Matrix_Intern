@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CarLux - Luxury Car Sales</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background-color: #333;
+      color: #fff;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    header nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: #ff5c5c;
+      color: #fff;
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero button {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      color: #fff;
+      background-color: #333;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #555;
+    }
+
+    /* Car Catalogue */
+    .catalogue {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .car-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+    }
+
+    .car-card {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      overflow: hidden;
+      flex: 1;
+      min-width: 280px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: transform 0.3s;
+      margin: 0.5rem;
+    }
+
+    .car-card:hover {
+      transform: scale(1.05);
+    }
+
+    .car-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .car-card h3 {
+      font-size: 1.25rem;
+      margin: 0.5rem 0;
+    }
+
+    .car-card p {
+      font-size: 1rem;
+      margin: 0.5rem;
+    }
+
+    .car-card button {
+      background-color: #333;
+      color: #fff;
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .car-card button:hover {
+      background-color: #555;
+    }
+
+    /* About Section */
+    .about {
+      padding: 2rem;
+      background-color: #f0f0f0;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Contact Form */
+    .contact {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .contact form {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 2rem;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact form label {
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    .contact input, .contact textarea {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 100%;
+      margin: 0.5rem 0 1rem 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .contact button {
+      padding: 0.8rem;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    .contact button:hover {
+      background-color: #555;
+    }
+
+    /* Footer */
+    footer {
+      padding: 1rem;
+      text-align: center;
+      background-color: #333;
+      color: #fff;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .car-cards {
+        flex-direction: column;
+      }
+
+      .car-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">CarLux</div>
+    <nav>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Find the Car of Your Dreams</h1>
+    <p>Luxury models with unmatched performance.</p>
+    <button onclick="scrollToCatalogue()">View Our Catalogue</button>
+  </section>
+
+  <!-- Car Catalogue -->
+  <section id="catalogue" class="catalogue">
+    <h2>Our Models</h2>
+    <div class="car-cards">
+      <div class="car-card">
+        <img src="https://live.staticflickr.com/65535/54109291904_0a017aa976_z.jpg" alt="Luxury Model A1">
+        <h3>Luxury Model A1</h3>
+        <p>Power, elegance, and cutting-edge technology.</p>
+        <button>Learn More</button>
+      </div>
+      <div class="car-card">
+        <img src="https://live.staticflickr.com/65535/54109407000_4458a4c1b1_z.jpg" alt="Sport Model B2">
+        <h3>Sport Model B2</h3>
+        <p>Designed for speed and performance.</p>
+        <button>Learn More</button>
+      </div>
+      <div class="car-card">
+        <img src="https://live.staticflickr.com/65535/54109209248_26da60ef86_c.jpg" alt="Executive Model C3">
+        <h3>Executive Model C3</h3>
+        <p>Ultimate luxury with unmatched comfort.</p>
+        <button>Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about" class="about">
+    <h2>About CarLux</h2>
+    <p>We specialize in luxury car sales, offering quality service and an exceptional driving experience.</p>
+  </section>
+
+  <!-- Contact Form -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      <label for="message">Message:</label>
+      <textarea id="message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 CarLux. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Function to scroll to the catalogue section smoothly
+    function scrollToCatalogue() {
+      const catalogueSection = document.getElementById('catalogue');
+      catalogueSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Form submission (simulation)
+    document.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Thank you for your message! We will get back to you soon.');
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
