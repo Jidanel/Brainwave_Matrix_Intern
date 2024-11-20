@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Transaction History{% endblock %}
+
+{% block content %}
+<div class="history-container">
+    <h2>Transaction History</h2>
+    <form method="post" class="history-form">
+        {% csrf_token %}
+        <label for="order_code">Enter Order Code</label>
+        <input type="text" name="order_code" placeholder="Enter your order code" class="large-input" required>
+        <button type="submit" class="btn">View Transactions</button>
+    </form>
+
+    {% if transactions %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order Code</th>
+                <th>Date</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.unique_code }}</td>
+                <td>{{ transaction.created_at }}</td>
+                <td>${{ transaction.total_price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No transactions found for this code.</p>
+    {% endif %}
+</div>
+{% endblock %}

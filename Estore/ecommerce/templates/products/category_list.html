@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Categories</h1>
+    <div class="category-grid">
+        {% for category in categories %}
+        <div class="card">
+            <h5>{{ category.name }}</h5>
+            <a href="{{ category.get_absolute_url }}" class="btn">View Products</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {% if categories.has_previous %}
+        <a href="?page={{ categories.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% for num in categories.paginator.page_range %}
+        <a href="?page={{ num }}" class="{% if num == categories.number %}active{% endif %}">{{ num }}</a>
+        {% endfor %}
+        {% if categories.has_next %}
+        <a href="?page={{ categories.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

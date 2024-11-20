@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ product.name }} - Details
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ product.name }}</h1>
+    <div class="product-detail">
+        {% if product.image %}
+        <div class="product-image">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+        {% endif %}
+        <div class="product-info">
+            <p><strong>Price:</strong> ${{ product.price }}</p>
+            <p><strong>Stock:</strong> {{ product.stock }}</p>
+            <p>{{ product.description }}</p>
+            <form method="post" action="{% url 'orders:cart_add' product.id %}">
+                {% csrf_token %}
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ product.stock }}" required>
+                <button type="submit" class="btn">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

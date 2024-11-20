@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Transaction History{% endblock %}
+
+{% block content %}
+<h2>Transaction History</h2>
+<form method="post" class="history-form">
+    {% csrf_token %}
+    <label for="card_number">Enter Card Number</label>
+    <input type="text" name="card_number" placeholder="Enter your card number" required>
+    <button type="submit" class="btn">View Transactions</button>
+</form>
+
+{% if transactions %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.order_id }}</td>
+            <td>{{ transaction.product.name }}</td>
+            <td>{{ transaction.quantity }}</td>
+            <td>${{ transaction.total_price }}</td>
+            <td>{{ transaction.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No transactions found for this card.</p>
+{% endif %}
+{% endblock %}

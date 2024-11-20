@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+  <div class="article-detail">
+    <h2 id="article-title">{{ article.title }}</h2>
+    <p id="article-body">{{ article.content }}</p>
+    <br>
+    {% if article.author == user or user.is_staff %}
+    <a href="{% url 'blog:article_update' pk=article.pk %}" class="button-edit">edit</a>
+{% endif %}<br><br>
+{% if article.author == user or user.is_staff %}
+    <form action="{% url 'blog:article_delete' pk=article.pk %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="button-delete">Delete</button>
+    </form>
+{% endif %}
+<br><br><br>
+
+    <!-- Section des commentaires -->
+    <div class="comments-section">
+      <h3>Comments</h3>
+
+      <!-- Liste des commentaires -->
+      <div class="comments-container">
+        {% for comment in comments %}
+          <div class="comment">
+            <p><strong>{{ comment.author.username }}</strong> - {{ comment.created_at|date:"d M Y H:i" }}</p>
+            <p>{{ comment.content }}</p><br>
+            <p>
+            {% if comment.author == user or user.is_superuser %}
+                <a href="{% url 'blog:delete_comment' comment.pk %}" class="button-delete">Delete</a> | <a href="{% url 'blog:comment_update' pk=comment.pk %}" class="button-edit">edit</a>
+            {% endif %}</p>
+          </div>
+        {% empty %}
+          <p>No comments yet.</p>
+        {% endfor %}
+      </div>
+
+ 
+      <div class="add-comment">
+        <form method="post" action="{% url 'blog:add_comment' article.pk %}">
+          {% csrf_token %}
+          <textarea name="content" id="comment-text" placeholder="Add a comment..." required></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

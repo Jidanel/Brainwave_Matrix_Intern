@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Edit comment{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Edit Comment</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.content.label_tag }}
+            {{ form.content }}
+        </div>
+        <button type="submit" class="button-submit">Save changes</button>
+        <a href="{% url 'blog:article_detail' pk=comment.article.pk %}" class="button-cancel">Cancel</a>
+    </form>
+</div>
+{% endblock %}

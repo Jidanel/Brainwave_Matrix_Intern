@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-commerce{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navbar">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'products:category_list' %}">Browse Categories</a></li>
+                    <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                    <li><a href="{% url 'accounts:register' %}">Register</a></li>
+                {% endif %}
+                <li class="cart-menu">
+                    <a href="{% url 'orders:cart' %}">
+                        Cart
+                        <span class="cart-count">{% if cart_item_count > 0 %}{{ cart_item_count }}{% else %}0{% endif %}</span>
+                    </a>
+                </li>
+                <li><a href="{% url 'orders:order_history' %}">History</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 E-commerce Platform</p>
+    </footer>
+
+    <script>
+        // Auto-update the cart count dynamically via AJAX
+        setInterval(() => {
+            fetch("{% url 'orders:cart_count' %}")
+                .then(response => response.json())
+                .then(data => {
+                    const cartCount = document.querySelector('.cart-count');
+                    if (data.count > 0) {
+                        cartCount.textContent = data.count;
+                        cartCount.style.display = 'inline-block';
+                    } else {
+                        cartCount.style.display = 'none';
+                    }
+                });
+        }, 5000); // Update every 5 seconds
+    </script>
+</body>
+</html>

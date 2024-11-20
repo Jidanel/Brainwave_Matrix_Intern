@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>{% if form.instance.pk %}edit the article{% else %}Create an article{% endif %}</h2>
+    
+    <form method="post">
+      {% csrf_token %}
+      
+      <!-- Champ de titre avec compteur de mots -->
+      <label for="title">Title :</label>
+      {{ form.title }}
+      <p id="title-counter">0 word</p>
+      
+      <!-- Champ de contenu avec compteur de mots -->
+      <label for="content">Content :</label>
+      {{ form.content }}
+      <p id="content-counter">0 word</p>
+      
+      <!-- Boutons d'action -->
+      <div class="form-actions">
+        <button type="submit" class="button-submit">{% if form.instance.pk %}Save changes{% else %}Create an article{% endif %}</button>
+        <a href="{% url 'blog:index' %}" class="button-cancel">Cancel</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Fonction pour mettre à jour le compteur de mots
+    function updateWordCount(inputField, counterElement) {
+      const wordCount = inputField.value.trim().split(/\s+/).filter(Boolean).length;
+      counterElement.textContent = `${wordCount} word${wordCount !== 1 ? 's' : ''}`;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      const titleInput = document.querySelector("#id_title");
+      const contentInput = document.querySelector("#id_content");
+      const titleCounter = document.getElementById("title-counter");
+      const contentCounter = document.getElementById("content-counter");
+
+      // Mettre à jour le compteur au chargement initial (nombre de mots existants)
+      updateWordCount(titleInput, titleCounter);
+      updateWordCount(contentInput, contentCounter);
+
+      // Ajouter des écouteurs d'événements pour mettre à jour le compteur en temps réel lors de la saisie
+      titleInput.addEventListener("input", function() {
+        updateWordCount(titleInput, titleCounter);
+      });
+
+      contentInput.addEventListener("input", function() {
+        updateWordCount(contentInput, contentCounter);
+      });
+    });
+  </script>
+{% endblock %}

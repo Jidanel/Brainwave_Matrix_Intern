@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block title %}Receipt{% endblock %}
+
+{% block content %}
+<h2>Order Receipt</h2>
+<p><strong>Order ID:</strong> {{ order.unique_code }}</p>
+<p><strong>Date:</strong> {{ order.created_at }}</p>
+<p><strong>Total Price:</strong> ${{ order.total_price }}</p>
+
+<h3>Products</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order.items.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.product.price }}</td>
+            <td>${{ item.subtotal }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'orders:order_history' %}" class="btn">View Order History</a>
+{% endblock %}

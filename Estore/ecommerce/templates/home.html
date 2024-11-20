@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<header class="hero">
+    <div class="hero-content">
+        <h1>Welcome to the E-commerce Store</h1>
+        <p>Find the best products for your needs!</p>
+        <a href="{% url 'products:category_list' %}" class="btn btn-primary">Browse Categories</a>
+    </div>
+</header>
+
+{% endblock %}
