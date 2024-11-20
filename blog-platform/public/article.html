@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Detail</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body onload="loadArticle();">
+  <header class="header">
+    <h1>Article Detail</h1>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="article-content">
+      <h2 id="article-title">Article Title</h2>
+      <p id="article-body">Content of the article...</p>
+      <button onclick="showEditModal()">Edit Article</button>
+      <button onclick="confirmDeleteArticle()">Delete Article</button>
+    </div>
+
+    <!-- Modal pour la modification de l'article -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span onclick="closeEditModal()" class="close">&times;</span>
+        <h2>Edit Article</h2>
+        <input type="text" id="edit-title" placeholder="Article Title">
+        <textarea id="edit-content" placeholder="Article Content"></textarea>
+        <button onclick="updateArticle()">Update Article</button>
+      </div>
+    </div>
+
+    <div class="comments-section">
+      <h3>Comments</h3>
+      <div class="comments-container"></div>
+      <div class="add-comment">
+        <textarea id="comment-text" placeholder="Add a comment..."></textarea>
+        <button onclick="addComment()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
